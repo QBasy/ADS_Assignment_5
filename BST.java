@@ -1,6 +1,11 @@
 public class BST<K extends Comparable<K>, V>
 {
     private Node root;
+
+    public BST()
+    {
+        root = null;
+    }
     private class Node
     {
         private K key;
@@ -45,9 +50,22 @@ public class BST<K extends Comparable<K>, V>
     }
     public void put(K key, V value)
     {
+        root = put(root, key, value);
+    }
+    private V get(Node node)
+    {
+        if (node != null)
+        {
+            get(node.left);
+            System.out.println(node.value + " ");
+            get(node.right);
+        }
+        return null;
     }
     public V get(K key)
-    {}
+    {
+        return get(root);
+    }
     private Node delete(Node current, V value)
     {
         if (current == null)
@@ -65,5 +83,7 @@ public class BST<K extends Comparable<K>, V>
         return root.left == null ? (int) root.value : findSmallestValue(root.left);
     }
     public Iterable<K> iterator()
-    {}
+    {
+
+    }
 }
