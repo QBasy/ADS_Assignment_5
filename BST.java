@@ -42,7 +42,7 @@ public class BST<K extends Comparable<K>, V>
             if (current.right == null) {
                 return current.left;
             }
-            int smallestValue = findSmallestValue(current.right);
+            V smallestValue = findSmallestValue(current.right);
             current.value = smallestValue;
             current.right = delete(current.right, smallestValue);
         }
@@ -72,15 +72,42 @@ public class BST<K extends Comparable<K>, V>
         {
             return null;
         }
-        if (value < current.value)
+        if ((int) value < (int) current.value)
+        {
+            current.left = delete(current.left, value);
+        }
+        else if ( (int) value > (int) current.value)
+        {
+            current.right = delete(current.right, value);
+        }
+        else
+        {
+            if (current.left == null && current.right == null)
+            {
+                System.out.println("LOL THEY ARE EMPTY)))");
+                return null;
+            }
+            if (current.left == null)
+            {
+                return current.right;
+            }
+            if (current.right == null)
+            {
+                return current.left;
+            }
+            V smallestValue = findSmallestValue(current.right);
+            current.value = smallestValue;
+            current.right = delete(current.right, smallestValue);
+        }
+        return current;
     }
-    public void delete(K key)
+    public void delete(V value)
     {
-        root = delete(root, key);
+        root = delete(root, value);
     }
-    public int findSmallestValue(Node root)
+    public V findSmallestValue(Node root)
     {
-        return root.left == null ? (int) root.value : findSmallestValue(root.left);
+        return root.left == null ? root.value : findSmallestValue(root.left);
     }
     public Iterable<K> iterator()
     {
