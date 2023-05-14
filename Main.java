@@ -11,6 +11,6 @@ public class Main
         tree.put(6, 655);
         tree.put(7, 324);
         tree.put(8, 422);
-        System.out.println(tree.get(0));
+        System.out.println(tree.get(422));
     }
 }
