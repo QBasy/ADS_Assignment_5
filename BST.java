@@ -60,8 +60,9 @@ public class BST<K extends Comparable<K>, V>
         if (node != null)
         {
             get(node.left);
-            System.out.println(node.value + " ");
+            System.out.print(node.value + " ");
             get(node.right);
+            System.out.println(node.value + " ");
         }
         return null;
     }

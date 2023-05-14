@@ -6,10 +6,11 @@ public class Main
         tree.put(1, 254);
         tree.put(2, 228);
         tree.put(3, 133);
-        System.out.println(tree.get(254));
-        /*for (var elem : tree)
-        {
-            System.out.println("key is " + elem.key + " and value is " + elem.value);
-        }*/
+        tree.put(4, 700);
+        tree.put(5, 121);
+        tree.put(6, 655);
+        tree.put(7, 324);
+        tree.put(8, 422);
+        System.out.println(tree.get(0));
     }
 }
