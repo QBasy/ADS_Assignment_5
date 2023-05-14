@@ -1,3 +1,7 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Stack;
+
 public class BST<K extends Comparable<K>, V>
 {
     private Node root;
@@ -111,6 +115,62 @@ public class BST<K extends Comparable<K>, V>
     }
     public Iterable<K> iterator()
     {
+        return (Iterable<K>) new BSTIterator();
+    }
 
+    private class BSTIterator implements Iteratorr<K>
+    {
+        private Node current;
+        private Stack<Node> stack;
+        public BSTIterator()
+        {
+            current = root;
+            stack = new Stack<>();
+            while (current != null)
+            {
+                stack.push(current);
+                current = current.left;
+            }
+        }
+        @Override
+        public boolean hasNext()
+        {
+            return !(stack.isEmpty());
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public K next()
+        {
+            if (!(hasNext()))
+            {
+                throw new NoSuchElementException();
+            }
+            Node node = stack.pop();
+            K key = node.key;
+            current = node.right;
+            while (current != null)
+            {
+                stack.push(current);
+                current = current.left;
+            }
+            return key;
+        }
+    }
+    public int size()
+    {
+        return size(root);
+    }
+    private int size(Node node)
+    {
+        if (node == null)
+        {
+            return 0;
+        }
+        return 1 + size(node.left) + size(node.right);
     }
 }
