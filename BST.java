@@ -202,6 +202,7 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
     {
         return containsValue(root, value);
     }
+
     public boolean containsValue(Node node, V value) {
         if (node == null) {
             return false;
@@ -211,6 +212,7 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
             return containsValue(node.left, value) || containsValue(node.right, value);
         }
     }
+
     public int size() {
         return size(root);
     }
