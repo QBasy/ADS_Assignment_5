@@ -10,8 +10,8 @@ public class Main
 
         while (!exit) {
             System.out.println("Enter your choice:");
-            System.out.println("1. Put (key, value)\n2. Get value by key\n3. Remove by key\n4. Check if value exists\n5. Get key by value\n6. Get size of Tree");
-            System.out.println("7. Exit");
+            System.out.println("1. Put (key, value)\n2. Get value by key\n3. Remove by key\n4. Check if value exists\n5. Get key by value\n6. Get size of Tree\n7.Get All keys");
+            System.out.println("8. Exit");
 
             int n = scanner.nextInt();
                 switch (n) {
@@ -64,12 +64,9 @@ public class Main
                     int size = tree.size();
                     System.out.println("Size equals to: " + size);
                 case 7:
-                    System.out.println("Printing all keys:");
-                    for (Integer k : tree) System.out.println("Key: " + k);
+                    tree.forEachKey();
+                    break;
                 case 8:
-                    System.out.println("Printing all keys:");
-                    for (String v : tree) System.out.println("Key: " + v);
-                case 9:
                     exit = true;
                     break;
                 default:

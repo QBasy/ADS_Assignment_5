@@ -125,8 +125,8 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         return root.left == null ? root.value : findSmallestValue(root.left);
     }
 
-    public Iterator<K> iterator() {
-        return (Iterator<K>) new BSTIterator();
+    public BSTIterator iterator() {
+        return new BSTIterator();
     }
 
     private class BSTIterator implements Iteratorr<K> {
@@ -165,6 +165,20 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
                 current = current.left;
             }
             return key;
+        }
+    }
+
+    public void forEachKey() {
+        forEachKey(root);
+    }
+
+    private void forEachKey(Node node) {
+        if (node != null) {
+            System.out.print(node.value + " ");
+            forEachKey(node.left);
+            forEachKey(node.right);
+        } else {
+            System.out.print("Empty ");
         }
     }
 
