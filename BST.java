@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
@@ -124,19 +125,17 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         return root.left == null ? root.value : findSmallestValue(root.left);
     }
 
-    public Iterable<K> iterator() {
-        return (Iterable<K>) new BSTIterator();
+    public Iterator<K> iterator() {
+        return (Iterator<K>) new BSTIterator();
     }
 
     private class BSTIterator implements Iteratorr<K> {
         private Node current;
         private Stack<Node> stack;
-        private Stack<K> keyStack;
 
         public BSTIterator() {
             current = root;
             stack = new Stack<>();
-            keyStack = new Stack<>();
             while (current != null) {
                 stack.push(current);
                 current = current.left;
@@ -149,7 +148,9 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         }
 
         @Override
-        public void remove() {}
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
 
         @Override
         public K next() {
@@ -158,7 +159,6 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
             }
             Node node = stack.pop();
             K key = node.key;
-            keyStack.push(key);
             current = node.right;
             while (current != null) {
                 stack.push(current);

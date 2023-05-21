@@ -64,6 +64,12 @@ public class Main
                     int size = tree.size();
                     System.out.println("Size equals to: " + size);
                 case 7:
+                    System.out.println("Printing all keys:");
+                    for (Integer k : tree) System.out.println("Key: " + k);
+                case 8:
+                    System.out.println("Printing all keys:");
+                    for (String v : tree) System.out.println("Key: " + v);
+                case 9:
                     exit = true;
                     break;
                 default:
