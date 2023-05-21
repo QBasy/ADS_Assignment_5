@@ -3,14 +3,14 @@ public class Main
     public static void main(String[] args)
     {
         BST<Integer, Integer> tree = new BST<>();
-        tree.put(1, 254);
-        tree.put(2, 228);
-        tree.put(3, 133);
-        tree.put(4, 700);
-        tree.put(5, 121);
-        tree.put(6, 655);
-        tree.put(7, 324);
-        tree.put(8, 422);
+        tree.put(254, 1);
+        tree.put(228, 2);
+        tree.put(133, 3);
+        tree.put(700, 4);
+        tree.put(121, 5);
+        tree.put(655, 6);
+        tree.put(324, 7);
+        tree.put(422, 8);
         System.out.println(tree.get(422));
     }
 }

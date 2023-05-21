@@ -1,44 +1,38 @@
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class BST<K extends Comparable<K>, V>
-{
+public class BST<K extends Comparable<K>, V extends Comparable<V>> {
     private Node root;
 
-    public BST()
-    {
+    public BST() {
         root = null;
     }
-    private class Node
-    {
+
+    private class Node {
         private K key;
         private V value;
         private Node left, right;
-        public Node(K key, V value)
-        {
+
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
             left = right = null;
         }
     }
-    private Node put(Node current, K key, V value)
-    {
+
+    private Node put(Node current, K key, V value) {
         if (current == null) {
             return new Node(key, value);
         }
-        if ((int) value < (int) current.value)
-        {
+        int comparison = key.compareTo(current.key);
+        if (comparison < 0) {
             current.left = put(current.left, key, value);
-        }
-        else if ((int) value > (int) current.value)
-        {
+        } else if (comparison > 0) {
             current.right = put(current.right, key, value);
-        }
-        else {
+        } else {
             if (current.left == null && current.right == null) {
                 return null;
             }
-            ;
             if (current.left == null) {
                 return current.right;
             }
@@ -51,56 +45,47 @@ public class BST<K extends Comparable<K>, V>
         }
         return current;
     }
-    public void put(K key, V value)
-    {
+
+    public void put(K key, V value) {
         root = put(root, key, value);
     }
+
     private V get(Node node, K key) {
-        if (node == null)
-        {
+        if (node == null) {
             return null;
         } else {
-            int compared = key.compareTo(node.key);
-            if (compared < 0) {
+            int comparison = key.compareTo(node.key);
+            if (comparison < 0) {
                 return get(node.left, key);
-            } else if (compared > 0) {
+            } else if (comparison > 0) {
                 return get(node.right, key);
             } else {
                 return node.value;
             }
         }
     }
-    public V get(K key)
-    {
+
+    public V get(K key) {
         return get(root, key);
     }
-    private Node delete(Node current, V value)
-    {
-        if (current == null)
-        {
+
+    private Node delete(Node current, V value) {
+        if (current == null) {
             return null;
         }
-        if ((int) value < (int) current.value)
-        {
+        int comparison = value.compareTo(current.value);
+        if (comparison < 0) {
             current.left = delete(current.left, value);
-        }
-        else if ( (int) value > (int) current.value)
-        {
+        } else if (comparison > 0) {
             current.right = delete(current.right, value);
-        }
-        else
-        {
-            if (current.left == null && current.right == null)
-            {
-                System.out.println("LOL THEY ARE EMPTY)))");
+        } else {
+            if (current.left == null && current.right == null) {
                 return null;
             }
-            if (current.left == null)
-            {
+            if (current.left == null) {
                 return current.right;
             }
-            if (current.right == null)
-            {
+            if (current.right == null) {
                 return current.left;
             }
             V smallestValue = findSmallestValue(current.right);
@@ -109,37 +94,37 @@ public class BST<K extends Comparable<K>, V>
         }
         return current;
     }
-    public void delete(V value)
-    {
+
+    public void delete(V value) {
         root = delete(root, value);
     }
-    public V findSmallestValue(Node root)
-    {
+
+    public V findSmallestValue(Node root) {
         return root.left == null ? root.value : findSmallestValue(root.left);
     }
-    public Iterable<K> iterator()
-    {
+
+    public Iterable<K> iterator() {
         return (Iterable<K>) new BSTIterator();
     }
 
-    private class BSTIterator implements Iteratorr<K>
-    {
+    private class BSTIterator implements Iteratorr<K> {
         private Node current;
         private Stack<Node> stack;
-        public BSTIterator()
-        {
+        private Stack<K> keyStack;
+
+        public BSTIterator() {
             current = root;
             stack = new Stack<>();
-            while (current != null)
-            {
+            keyStack = new Stack<>();
+            while (current != null) {
                 stack.push(current);
                 current = current.left;
             }
         }
+
         @Override
-        public boolean hasNext()
-        {
-            return !(stack.isEmpty());
+        public boolean hasNext() {
+            return !stack.isEmpty();
         }
 
         @Override
@@ -148,31 +133,28 @@ public class BST<K extends Comparable<K>, V>
         }
 
         @Override
-        public K next()
-        {
-            if (!(hasNext()))
-            {
+        public K next() {
+            if (!hasNext()) {
                 throw new NoSuchElementException();
             }
             Node node = stack.pop();
             K key = node.key;
+            keyStack.push(key);
             current = node.right;
-            while (current != null)
-            {
+            while (current != null) {
                 stack.push(current);
                 current = current.left;
             }
             return key;
         }
     }
-    public int size()
-    {
+
+    public int size() {
         return size(root);
     }
-    private int size(Node node)
-    {
-        if (node == null)
-        {
+
+    private int size(Node node) {
+        if (node == null) {
             return 0;
         }
         return 1 + size(node.left) + size(node.right);
