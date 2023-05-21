@@ -40,8 +40,9 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
                 return current.left;
             }
             V smallestValue = findSmallestValue(current.right);
+            K keyOfSmallestValue = getKey(smallestValue);
             current.value = smallestValue;
-            current.right = delete(current.right, smallestValue);
+            current.right = delete(current.right, keyOfSmallestValue);
         }
         return current;
     }
