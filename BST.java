@@ -69,15 +69,34 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         return get(root, key);
     }
 
-    private Node delete(Node current, V value) {
+    public K getKey(Node node, V value) {
+        if (node == null) {
+            return null;
+        } else {
+            int comparison = value.compareTo(node.value);
+            if (comparison < 0) {
+                return getKey(node.left, value);
+            } else if (comparison > 0) {
+                return getKey(node.right, value);
+            } else {
+                return node.key;
+            }
+        }
+    }
+
+    public K getKey(V value) {
+        return getKey(root, value);
+    }
+
+    private Node delete(Node current, K key) {
         if (current == null) {
             return null;
         }
-        int comparison = value.compareTo(current.value);
+        int comparison = key.compareTo(current.key);
         if (comparison < 0) {
-            current.left = delete(current.left, value);
+            current.left = delete(current.left, key);
         } else if (comparison > 0) {
-            current.right = delete(current.right, value);
+            current.right = delete(current.right, key);
         } else {
             if (current.left == null && current.right == null) {
                 return null;
@@ -89,14 +108,15 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
                 return current.left;
             }
             V smallestValue = findSmallestValue(current.right);
+            K keyOfSmallestValue = getKey(smallestValue);
             current.value = smallestValue;
-            current.right = delete(current.right, smallestValue);
+            current.right = delete(current.right, keyOfSmallestValue);
         }
         return current;
     }
 
-    public void delete(V value) {
-        root = delete(root, value);
+    public void delete(K key) {
+        root = delete(root, key);
     }
 
     public V findSmallestValue(Node root) {
@@ -128,9 +148,7 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         }
 
         @Override
-        public void remove() {
-
-        }
+        public void remove() {}
 
         @Override
         public K next() {
