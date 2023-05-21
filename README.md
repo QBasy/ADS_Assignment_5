@@ -240,10 +240,22 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
     }
 ```
 
-## Method getKey and getKeyRecursive
+## Method forEachKey()
 
 ```java
-   
+    public void forEachKey() {
+        forEachKey(root);
+    }
+
+    private void forEachKey(Node node) {
+        if (node != null) {
+            System.out.print(node.value + " ");
+            forEachKey(node.left);
+            forEachKey(node.right);
+        } else {
+            System.out.print("Empty ");
+        }
+    }
 ```
 
 ## Method equals()
