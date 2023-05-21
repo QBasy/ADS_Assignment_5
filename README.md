@@ -244,28 +244,121 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
    
 ```
 
+## Method equals()
+
+```java
+    public boolean equals(Node node, V value)
+    {
+        if (node == null) {
+            return false;
+        } else {
+            int comparison = value.compareTo(node.value);
+            if (comparison < 0) {
+                return equals(node.left, value);
+            } else if (comparison > 0) {
+                return equals(node.right, value);
+            } else {
+                return true;
+            }
+        }
+    }
+```
+
+## Method containsValue()
+
+```java
+    public boolean containsValue(V value)
+    {
+        return containsValue(root, value);
+    }
+    public boolean containsValue(Node node, V value) {
+        if (node == null) {
+            return false;
+        } else if (equals(node, value)) {
+            return true;
+        } else {
+            return containsValue(node.left, value) || containsValue(node.right, value);
+        }
+    }
+```
+
+## Method int size()
+
+```java
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + size(node.left) + size(node.right);
+    }
+```
+
 ---
 
-# Class MyTestingClass 🚀 [Link](MyTestingClass.java)
+# Class BSTIterator<K>
 
-```java
-    
+```java 
+    private class BSTIterator<K> implements Iteratorr<K> {
+        private Node current;
+        private Stack<Node> stack;
+        private Stack<K> keyStack;
+
+        public BSTIterator<K>() {
+            current = root;
+            stack = new Stack<>();
+            keyStack = new Stack<>();
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+        }
+        /*
+        Methods...
+        */
+    }
 ```
 
-## Method addElement
+
+## Method hasNext()
 
 ```java
-    
+    @Override
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
 ```
 
-## Method printBucketSize
+
+## Method next()
 
 ```java
-    
+    @Override
+    public K next() {
+        if (!hasNext()) {
+             throw new NoSuchElementException();
+        }
+        Node node = stack.pop();
+        K key = node.key;
+        keyStack.push(key);
+        current = node.right;
+        while (current != null) {
+            stack.push(current);
+            current = current.left;
+        }
+        return key;
+    }
 ```
 
-## Method sumContainsTenThousand
+## Interface Iteratorr<E>
 
 ```java
-    
+    public interface Iteratorr<E>{
+        E next();
+        boolean hasNext();
+        void remove();
+    }
 ```
