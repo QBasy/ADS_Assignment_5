@@ -167,10 +167,6 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
             return key;
         }
     }
-    public boolean equals(V value)
-    {
-        return equals(root, value);
-    }
 
     public boolean equals(Node node, V value)
     {
@@ -195,7 +191,7 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
     public boolean containsValue(Node node, V value) {
         if (node == null) {
             return false;
-        } else if (value.equals(node.value)) {
+        } else if (equals(node, value)) {
             return true;
         } else {
             return containsValue(node.left, value) || containsValue(node.right, value);
