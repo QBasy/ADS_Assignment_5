@@ -167,7 +167,40 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
             return key;
         }
     }
+    public boolean equals(V value)
+    {
+        return equals(root, value);
+    }
 
+    public boolean equals(Node node, V value)
+    {
+        if (node == null) {
+            return false;
+        } else {
+            int comparison = value.compareTo(node.value);
+            if (comparison < 0) {
+                return equals(node.left, value);
+            } else if (comparison > 0) {
+                return equals(node.right, value);
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public boolean containsValue(V value)
+    {
+        return containsValue(root, value);
+    }
+    public boolean containsValue(Node node, V value) {
+        if (node == null) {
+            return false;
+        } else if (value.equals(node.value)) {
+            return true;
+        } else {
+            return containsValue(node.left, value) || containsValue(node.right, value);
+        }
+    }
     public int size() {
         return size(root);
     }

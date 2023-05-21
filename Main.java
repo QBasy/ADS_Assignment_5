@@ -10,11 +10,11 @@ public class Main
 
         while (!exit) {
             System.out.println("Enter your choice:");
-            System.out.println("1. Put (key, value)\n2. Get value by key\n3. Remove by key\n4. Check if value exists\n5. Get key by value");
-            System.out.println("6. Exit");
+            System.out.println("1. Put (key, value)\n2. Get value by key\n3. Remove by key\n4. Check if value exists\n5. Get key by value\n6. Get size of Tree");
+            System.out.println("7. Exit");
 
             int n = scanner.nextInt();
-            switch (n) {
+                switch (n) {
                 case 1:
                     System.out.println("Enter key:");
                     int key = scanner.nextInt();
@@ -39,7 +39,7 @@ public class Main
                     tree.delete(key);
                     String removedValue = tree.get(key);
                     if (removedValue != null) {
-                        System.out.println("Removed value: " + removedValue);
+                        System.out.println("Press F to value: " + removedValue);
                     } else {
                         System.out.println("Key not found.");
                     }
@@ -47,7 +47,7 @@ public class Main
                 case 4:
                     System.out.println("Enter value:");
                     value = scanner.next();
-                    boolean contains = tree.equals(value);
+                    boolean contains = tree.containsValue(value);
                     System.out.println("Value exists: " + contains);
                     break;
                 case 5:
@@ -61,14 +61,17 @@ public class Main
                     }
                     break;
                 case 6:
+                    int size = tree.size();
+                    System.out.println("Size equals to: " + size);
+                case 7:
                     exit = true;
                     break;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("Don't be a 🤡");
             }
             System.out.println();
         }
 
-        System.out.println("Goodbye!");
+        System.out.println("BYE BYE!");
     }
 }
