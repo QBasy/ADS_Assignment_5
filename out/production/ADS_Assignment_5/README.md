@@ -16,8 +16,8 @@
 
         while (!exit) {
             System.out.println("Enter your choice:");
-            System.out.println("1. Put (key, value)\n2. Get value by key\n3. Remove by key\n4. Check if value exists\n5. Get key by value\n6. Get size of Tree");
-            System.out.println("7. Exit");
+            System.out.println("1. Put (key, value)\n2. Get value by key\n3. Remove by key\n4. Check if value exists\n5. Get key by value\n6. Get size of Tree\n7.Get All keys");
+            System.out.println("8. Exit");
 
             int n = scanner.nextInt();
                 switch (n) {
@@ -70,6 +70,9 @@
                     int size = tree.size();
                     System.out.println("Size equals to: " + size);
                 case 7:
+                    tree.forEachKey();
+                    break;
+                case 8:
                     exit = true;
                     break;
                 default:
@@ -77,7 +80,6 @@
             }
             System.out.println();
         }
-
         System.out.println("BYE BYE!");
     }
 ```
@@ -238,10 +240,22 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
     }
 ```
 
-## Method getKey and getKeyRecursive
+## Method forEachKey()
 
 ```java
-   
+    public void forEachKey() {
+        forEachKey(root);
+    }
+
+    private void forEachKey(Node node) {
+        if (node != null) {
+            System.out.print(node.value + " ");
+            forEachKey(node.left);
+            forEachKey(node.right);
+        } else {
+            System.out.print("Empty ");
+        }
+    }
 ```
 
 ## Method equals()
@@ -350,6 +364,14 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
             current = current.left;
         }
         return key;
+    }
+```
+    
+## Method remove()
+```java
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
     }
 ```
 
