@@ -223,4 +223,20 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         }
         return 1 + size(node.left) + size(node.right);
     }
+
+    public void printTree() {
+        printTree(root, 0);
+    }
+
+    private void printTree(Node node, int level) {
+        if (node == null) {
+            return;
+        }
+        printTree(node.right, level + 1);
+        for (int i = 0; i < level; i++) {
+            System.out.print("    ");
+        }
+        System.out.println(node.value);
+        printTree(node.left, level + 1);
+    }
 }
