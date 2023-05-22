@@ -4,15 +4,12 @@ public class Main
 {
     public static void main(String[] args) {
         BST<Integer, String> tree = new BST<>();
-
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
-
         while (!exit) {
             System.out.println("Enter your choice:");
             System.out.println("1. Put (key, value)\n2. Get value by key\n3. Remove by key\n4. Check if value exists\n5. Get key by value\n6. Get size of Tree\n7. Get All keys\n8. Print all Tree");
-            System.out.println("9. Exit");
-
+            System.out.println("9. Exit\n");
             int n = scanner.nextInt();
                 switch (n) {
                 case 1:
