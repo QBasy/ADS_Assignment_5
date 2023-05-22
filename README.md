@@ -355,7 +355,7 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>>
 
 ---
 
-# Class BSTIterator<K> [Link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+# Class BSTIterator<K> [Link](https://youtu.be/dQw4w9WgXcQ?t=43)
 
 ```java 
     private class BSTIterator<K> implements Iteratorr<K> {
