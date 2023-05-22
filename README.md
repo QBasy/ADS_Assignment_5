@@ -92,7 +92,7 @@
 
 ---
 
-# Class MyHashTable 🚀 [Link](MyHashTable.java)
+# Class BST 🚀 [Link](BST.java)
 
 ```java
 import java.util.NoSuchElementException;
