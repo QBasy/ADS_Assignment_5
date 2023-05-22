@@ -8,19 +8,22 @@
 # Main 🚀 [Link](Main.java)
 
 ```java
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         BST<Integer, String> tree = new BST<>();
 
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
-        while (!exit) {
+        while (!exit) 
+        {
             System.out.println("Enter your choice:");
-            System.out.println("1. Put (key, value)\n2. Get value by key\n3. Remove by key\n4. Check if value exists\n5. Get key by value\n6. Get size of Tree\n7.Get All keys");
-            System.out.println("8. Exit");
+            System.out.println("1. Put (key, value)\n2. Get value by key\n3. Remove by key\n4. Check if value exists\n5. Get key by value\n6. Get size of Tree\n7. Get All keys\n8. Print all Tree");
+            System.out.println("9. Exit");
 
             int n = scanner.nextInt();
-                switch (n) {
+                switch (n) 
+                {
                 case 1:
                     System.out.println("Enter key:");
                     int key = scanner.nextInt();
@@ -73,6 +76,9 @@
                     tree.forEachKey();
                     break;
                 case 8:
+                    tree.printTree();
+                    break;
+                case 9:
                     exit = true;
                     break;
                 default:
@@ -92,14 +98,16 @@
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class BST<K extends Comparable<K>, V extends Comparable<V>> {
+public class BST<K extends Comparable<K>, V extends Comparable<V>> 
+{
     private Node root;
 
     public BST() {
         root = null;
     }
 
-    private class Node {
+    private class Node 
+    {
         private K key;
         private V value;
         private Node left, right;
@@ -119,7 +127,8 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
 ## Method put()
 
 ```java
-    private Node put(Node current, K key, V value) {
+    private Node put(Node current, K key, V value) 
+    {
         if (current == null) {
             return new Node(key, value);
         }
@@ -146,7 +155,8 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         return current;
     }
 
-    public void put(K key, V value) {
+    public void put(K key, V value) 
+    {
         root = put(root, key, value);
     }
 ```
@@ -154,7 +164,8 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
 ## Method get()
 
 ```java
-    private V get(Node node, K key) {
+    private V get(Node node, K key)
+    {
         if (node == null) {
             return null;
         } else {
@@ -177,7 +188,8 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
 ## Method getKey()
 
 ```java
-    public K getKey(Node node, V value) {
+    public K getKey(Node node, V value)
+    {
         if (node == null) {
             return null;
         } else {
@@ -200,7 +212,8 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
 ## Method delete()
 
 ```java
-    private Node delete(Node current, K key) {
+    private Node delete(Node current, K key) 
+    {
         if (current == null) {
             return null;
         }
@@ -227,7 +240,8 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         return current;
     }
 
-    public void delete(K key) {
+    public void delete(K key) 
+    {
         root = delete(root, key);
     }
 ```
@@ -235,7 +249,8 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
 ## Method findSmallestValue()
 
 ```java
-    public V findSmallestValue(Node root) {
+    public V findSmallestValue(Node root) 
+    {
         return root.left == null ? root.value : findSmallestValue(root.left);
     }
 ```
@@ -243,11 +258,13 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
 ## Method forEachKey()
 
 ```java
-    public void forEachKey() {
+    public void forEachKey() 
+    {
         forEachKey(root);
     }
 
-    private void forEachKey(Node node) {
+    private void forEachKey(Node node) 
+    {
         if (node != null) {
             System.out.print(node.value + " ");
             forEachKey(node.left);
@@ -285,7 +302,8 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
     {
         return containsValue(root, value);
     }
-    public boolean containsValue(Node node, V value) {
+    public boolean containsValue(Node node, V value) 
+    {
         if (node == null) {
             return false;
         } else if (equals(node, value)) {
@@ -296,18 +314,42 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
     }
 ```
 
-## Method int size()
+## Method size()
 
 ```java
-    public int size() {
+    public int size() 
+    {
         return size(root);
     }
 
-    private int size(Node node) {
+    private int size(Node node) 
+    {
         if (node == null) {
             return 0;
         }
         return 1 + size(node.left) + size(node.right);
+    }
+```
+
+## Method printTree()
+
+```java
+    public void printTree() 
+    {
+        printTree(root, 0);
+    }
+
+    private void printTree(Node node, int level) 
+    {
+        if (node == null) {
+            return;
+        }
+        printTree(node.right, level + 1);
+        for (int i = 0; i < level; i++) {
+            System.out.print("    ");
+        }
+        System.out.println(node.value);
+        printTree(node.left, level + 1);
     }
 ```
 
