@@ -245,12 +245,16 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
     }
 
     private int getHeight(Node node) {
-        if (node == null) {
+        if (node == null || (node.left == null && node.right == null)) {
             return 0;
         } else {
             int leftHeight = getHeight(node.left);
             int rightHeight = getHeight(node.right);
-            return (leftHeight > rightHeight) ? leftHeight + 1 : rightHeight + 1;
+            if (leftHeight > rightHeight) {
+                return leftHeight + 1;
+            } else {
+                return rightHeight + 1;
+            }
         }
     }
 }
