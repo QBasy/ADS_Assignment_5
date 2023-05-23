@@ -11,6 +11,6 @@ public class defence5 extends BST
         tree.put(6, "-4");
         tree.put(7, "5");
         tree.put(8, "-1");
-        tree.getHeight();
+        System.out.println(tree.getHeight());
     }
 }
