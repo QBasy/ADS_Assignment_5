@@ -4,7 +4,8 @@ import java.util.Stack;
 public class BST<K extends Comparable<K>, V extends Comparable<V>> {
     private Node root;
 
-    public BST() {
+    public BST()
+    {
         root = null;
     }
 
@@ -237,5 +238,28 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         }
         System.out.println(node.value);
         printTree(node.left, level + 1);
+    }
+
+    public void getHeight()
+    {
+        getHeight(root, 0);
+    }
+
+    private void getHeight(Node node, int index)
+    {
+        int hright = 0, hleft = 0;
+        if (node == null)
+        {
+            System.out.println(index);
+            return;
+        }
+        hright = index;
+        getHeight(node.right, index + 1);
+        hleft = index;
+        getHeight(node.left, index + 1);
+        if (hleft == hright)
+        {
+            System.out.println(hleft);
+        }
     }
 }
